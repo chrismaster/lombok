@@ -7,7 +7,7 @@ public interface WithNested<Z> {
 		}
 		@java.lang.SuppressWarnings("all")
 		public WithNested.IAmStaticReally withX(final String x) {
-			return this.x == x ? this : new WithNested.IAmStaticReally(x);
+			return this.x == x ? this : new IAmStaticReally(x);
 		}
 	}
 }

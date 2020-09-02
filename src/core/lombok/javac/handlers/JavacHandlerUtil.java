@@ -644,6 +644,13 @@ public class JavacHandlerUtil {
 		return JavacHandlerUtil.namePlusTypeParamsToTypeReference(maker, typeNode, ((JCClassDecl) typeNode.get()).typarams);
 	}
 	
+	public static JCExpression cloneSelfTypeAsSingleTypeReference(JavacNode childOfType) {
+		JavacNode typeNode = childOfType;
+		JavacTreeMaker maker = childOfType.getTreeMaker();
+		while (typeNode != null && typeNode.getKind() != Kind.TYPE) typeNode = typeNode.up();
+		return namePlusTypeParamsToSingleTypeReference(maker, typeNode, ((JCClassDecl) typeNode.get()).typarams);
+	}
+	
 	public static boolean isBoolean(JavacNode field) {
 		JCExpression varType = ((JCVariableDecl) field.get()).vartype;
 		return isBoolean(varType);
@@ -1846,6 +1853,13 @@ public class JavacHandlerUtil {
 		}
 		
 		r = r == null ? maker.Ident(typeName) : maker.Select(r, typeName);
+		if (!params.isEmpty()) r = maker.TypeApply(r, typeParameterNames(maker, params));
+		return r;
+	}
+	
+	public static JCExpression namePlusTypeParamsToSingleTypeReference(JavacTreeMaker maker, JavacNode type, List<JCTypeParameter> params) {
+		JCClassDecl td = (JCClassDecl) type.get();
+		JCExpression r = maker.Ident(td.name);
 		if (!params.isEmpty()) r = maker.TypeApply(r, typeParameterNames(maker, params));
 		return r;
 	}

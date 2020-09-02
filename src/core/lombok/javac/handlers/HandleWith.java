@@ -240,7 +240,7 @@ public class HandleWith extends JavacAnnotationHandler<With> {
 		if (!makeAbstract) {
 			ListBuffer<JCStatement> statements = new ListBuffer<JCStatement>();
 			
-			JCExpression selfType = cloneSelfType(field);
+			JCExpression selfType = cloneSelfTypeAsSingleTypeReference(field);
 			if (selfType == null) return null;
 			
 			ListBuffer<JCExpression> args = new ListBuffer<JCExpression>();

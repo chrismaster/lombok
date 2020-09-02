@@ -264,7 +264,7 @@ public class HandleWith extends EclipseAnnotationHandler<With> {
 			
 			AllocationExpression constructorCall = new AllocationExpression();
 			constructorCall.arguments = args.toArray(new Expression[0]);
-			constructorCall.type = cloneSelfType(fieldNode, source);
+			constructorCall.type = cloneSelfTypeAsSingleTypeReference(fieldNode, source);
 			
 			Expression identityCheck = new EqualExpression(
 					createFieldAccessor(fieldNode, FieldAccess.ALWAYS_FIELD, source),
