@@ -12,6 +12,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy: 
+      matrix: 
+        test: [javac8, javac11, javac14, eclipse-oxygen, eclipse-202006, ecj11]
 
     steps:
     - uses: actions/checkout@v2
@@ -20,4 +23,4 @@ jobs:
       with:
         java-version: 14
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml test
+      run: ant -noinput -buildfile build.xml test.${{ matrix.test }}
