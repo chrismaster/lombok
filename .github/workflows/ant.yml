@@ -21,5 +21,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 14
+    - name: Write jvm.locations
+      run: echo "j14=$JAVA_HOME" > jvm.locations
     - name: Build with Ant
-      run: JAVA_HOME=$JAVA_HOME ant -noinput -buildfile build.xml test.${{ matrix.test }}
+      run: ant -noinput -buildfile build.xml test.${{ matrix.test }}
