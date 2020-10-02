@@ -14,6 +14,7 @@ jobs:
     strategy: 
       matrix: 
         test: [javac8, javac11, javac14, eclipse-oxygen, eclipse-202006, ecj11]
+      fail-fast: false
 
     steps:
     - uses: actions/checkout@v2
