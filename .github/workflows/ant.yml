@@ -22,6 +22,4 @@ jobs:
       with:
         java-version: 14
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml test.${{ matrix.test }}
-      env:
-        JAVA_HOME: ${{JAVA_HOME}}
+      run: JAVA_HOME=$JAVA_HOME ant -noinput -buildfile build.xml test.${{ matrix.test }}
