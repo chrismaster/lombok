@@ -22,6 +22,6 @@ jobs:
       with:
         java-version: 14
     - name: Write jvm.locations
-      run: echo "j14=$JAVA_HOME" > jvm.locations
+      run: printf "j11=$JAVA_HOME\nj14=$JAVA_HOME" > jvm.locations
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml test.${{ matrix.test }}
+      run: ant -noinput -buildfile build.xml dist test.${{ matrix.test }}
